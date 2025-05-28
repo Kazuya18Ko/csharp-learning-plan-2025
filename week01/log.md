@@ -1,15 +1,16 @@
 # TroubleShooting Log -C# Learning Plan
 
-## Day 1: “ú–{Œê“ü—Í‚ÉVisualStudio‚Ìƒ^[ƒ~ƒiƒ‹‚ªŒÅ‚Ü‚é
+## Day 1: æ—¥æœ¬èªå…¥åŠ›æ™‚ã«VisualStudioã®ã‚¿ãƒ¼ãƒŸãƒŠãƒ«ãŒå›ºã¾ã‚‹
 
-**Œ»Û**
-Visual Studio‚Ìƒ^[ƒ~ƒiƒ‹‚Å“ú–{Œê‚ğ“ü—Í‚·‚é‚Æ“r’†‚ÅŒÅ‚Ü‚èA
-`The terminal process had exited with code 2` ‚Æ•\¦‚³‚ê‚½B
+**ç¾è±¡**
 
-**Œ´ˆö**
-vs‚Ì‘‡ƒ^[ƒ~ƒiƒ‹(PowerShell)‚ª“ú–{Œê‚ÌIME‚Æ‘Š«‚ªˆ«‚©‚Á‚½B
+Visual Studioã®ã‚¿ãƒ¼ãƒŸãƒŠãƒ«ã§æ—¥æœ¬èªã‚’å…¥åŠ›ã™ã‚‹ã¨é€”ä¸­ã§å›ºã¾ã‚Šã€
+`The terminal process had exited with code 2` ã¨è¡¨ç¤ºã•ã‚ŒãŸã€‚
 
-**‘Î‰**
-- Windows Terminal + Git Bash‚ÉØ‚è‘Ö‚¦‚½
+**åŸå› **
+vsã®ç·åˆã‚¿ãƒ¼ãƒŸãƒŠãƒ«(PowerShell)ãŒæ—¥æœ¬èªã®IMEã¨ç›¸æ€§ãŒæ‚ªã‹ã£ãŸã€‚
+
+**å¯¾å¿œ**
+- Windows Terminal + Git Bashã«åˆ‡ã‚Šæ›¿ãˆãŸ
 - 
 
