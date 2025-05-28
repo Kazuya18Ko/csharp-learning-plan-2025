@@ -64,12 +64,19 @@ githubサイト上でREADMEを一度commitしていたのにpushしていなか�
 **対応**
 
 1.　作業中の変更を一時退避（stash）
+
 `git stash push -m "log.md 追記前の退避"`
+
 2. rebaseを実行
+1. 
 `git pull --rebase origin main`
+
 3. 再度、作業中の変更を復元
+1. 
 `git stash pop`
+
 4, 差分を確認して問題なければpush
+
 `git status`
 `git push origin main`
 
