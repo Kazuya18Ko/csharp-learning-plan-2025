@@ -15,7 +15,7 @@ string message = $"名前:{name},年齢;{age}";
 Console.WriteLine($"1+2={1+2}"); // 1+2=3
 ```
 
-## stringBuilder
+## StringBuilder
 - `string`は**不変型(immutable)のため、何度も連結するとメモリ負荷が高く非効率的**
 - `StringBuilder`は連結のたびに新しい文字列を作らないため、**パフォーマンスがいい**
 
