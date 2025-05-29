@@ -7,7 +7,7 @@
 ```csharp
 string name = "Kazuya";
 int age = 28;
-string message = $"名前:{name},年齢;{age}";
+string message = $"名前:{name},年齢:{age}";
 ```
 
 - 中で式も書ける
