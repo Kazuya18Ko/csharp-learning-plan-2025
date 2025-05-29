@@ -1,4 +1,4 @@
-# null安全とNullable型
+# null安全とNullable型(Day2)
 
 ## C#におけるnull安全
 - C#では値型(`int`,`bool`など)は通常`null`を取ることができない。
