@@ -12,7 +12,7 @@ public class Person
 
 	public void Great()
 	{
-		Console.WriteLine($"こんにちは、私は{name}、{Age}歳です。");
+		Console.WriteLine($"こんにちは、私は{Name}、{Age}歳です。");
 	}
 }
 ```
