@@ -10,7 +10,7 @@ public class Person
 	public string Name;
 	public int Age;
 
-	public void Great()
+	public void Greet()
 	{
 		Console.WriteLine($"こんにちは、私は{Name}、{Age}歳です。");
 	}
@@ -22,5 +22,23 @@ public class Person
 Person person = new Person();
 person.Name = "Kazuya";
 person.Age = 28;
-person.Great(); // →こんにちは、私はKazuya、28歳です。
+person.Greet(); // →こんにちは、私はKazuya、28歳です。
 ```
+## 2.コンストラクタとオーバーロード
+
+### コンストラクタとは？
+オブジェクト生成時に自動的に呼ばれる特別なメソッド。初期化処理を行います。
+```csharp
+public Person(string name, int age)
+{
+	Name = name;
+	Age = age;
+}
+```
+
+### オーバーロードとは？
+
+同じ名前のメソッドやコンストラクトを**引数や肩の違いで複数定義すること。**
+```csharp
+public Person(){} // 引数なし
+public Person(string name){Name = name} // 名前だけ
