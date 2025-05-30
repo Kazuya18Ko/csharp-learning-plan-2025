@@ -43,16 +43,6 @@ public Person(string name, int age)
 public Person(){} // 引数なし
 public Person(string name){Name = name} // 名前だけ
 ```
-
-### `this`による共通処理
-- `this`キーワードを使うと、同じクラス内のフィールドやメソッドを参照できる。
-- どのコンストラクタかは引数の数や型で決まる(コンパイラが判断)。
-
-```csharp
-// 名前だけのコンストラクタだが、名前と年齢のコンストラクタを呼び出す
-public Person(string name) : this(name, 0){} 
-```
-
 ## 3.アクセス修飾子とthis
 
 ### アクセス修飾子とは
@@ -63,10 +53,22 @@ public Person(string name) : this(name, 0){}
 |public	|どこからでもアクセス可能			|
 |private|同じクラス内からのみアクセス可能	|
 
+### `this`による共通処理
+- `this`キーワードを使うと、同じクラス内のフィールドやメソッドを参照できる。
+- どのコンストラクタかは引数の数や型で決まる(コンパイラが判断)。
+
+```csharp
+// 名前だけのコンストラクタだが、名前と年齢のコンストラクタを呼び出す
+public Person(string name) : this(name, 0){} 
+```
+
 ```csharp
 private int age;
 public void SetAge(int age)
 {
-	this.age = age; // thisは現在のインスタンスを指す
+	this.age = age; // 左辺のageはフィールド、右辺のageは引数
 }
 ```
+ このように、**引数とフィールドの名前がかぶったとき**、`this`を使うことで「自分のクラスのフィールド」を明示的に示します。
+
+
