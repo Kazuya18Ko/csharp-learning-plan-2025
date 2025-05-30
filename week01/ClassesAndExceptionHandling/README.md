@@ -53,3 +53,20 @@ public Person(string name){Name = name} // 名前だけ
 public Person(string name) : this(name, 0){} 
 ```
 
+## 3.アクセス修飾子とthis
+
+### アクセス修飾子とは
+- クラスやメンバの**アクセス範囲を制御するキーワード**。
+
+|修飾子	|意味								|
+|-------|-----------------------------------|
+|public	|どこからでもアクセス可能			|
+|private|同じクラス内からのみアクセス可能	|
+
+```csharp
+private int age;
+public void SetAge(int age)
+{
+	this.age = age; // thisは現在のインスタンスを指す
+}
+```
