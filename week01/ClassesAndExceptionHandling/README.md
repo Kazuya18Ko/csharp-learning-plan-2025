@@ -42,3 +42,14 @@ public Person(string name, int age)
 ```csharp
 public Person(){} // 引数なし
 public Person(string name){Name = name} // 名前だけ
+```
+
+### `this`による共通処理
+- `this`キーワードを使うと、同じクラス内のフィールドやメソッドを参照できる。
+- どのコンストラクタかは引数の数や型で決まる(コンパイラが判断)。
+
+```csharp
+// 名前だけのコンストラクタだが、名前と年齢のコンストラクタを呼び出す
+public Person(string name) : this(name, 0){} 
+```
+
