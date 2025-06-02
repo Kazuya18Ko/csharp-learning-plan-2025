@@ -24,3 +24,4 @@
 # 各プロジェクトに移動してビルド＆実行
 cd week01/TypesAndVariables
 dotnet run
+```
