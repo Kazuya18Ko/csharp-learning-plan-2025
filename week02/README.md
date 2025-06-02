@@ -4,7 +4,7 @@
 
 ## 実施課題一覧
 
-- [ ]  [NumberGuessingGame](./NumberGuessingGame/README.md)  
+- &check;  [NumberGuessingGame](./NumberGuessingGame/README.md)  
   ユーザーが1〜100の数を当てる簡単なゲーム。分岐・ループ・例外処理を使用。
 
 - [ ]  [ToDoListApp](./ToDoListApp/README.md)  
