@@ -1,4 +1,4 @@
-﻿# TroubleShooting Log -C# Learning Plan
+# TroubleShooting Log -C# Learning Plan Week01
 
 ## Day 1: 日本語入力時にVisualStudioのターミナルが固まる(#1)
 
