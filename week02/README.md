@@ -4,10 +4,10 @@
 
 ## 実施課題一覧
 
-- ✅ [NumberGuessingGame](./NumberGuessingGame/README.md)  
+- [ ]  [NumberGuessingGame](./NumberGuessingGame/README.md)  
   ユーザーが1〜100の数を当てる簡単なゲーム。分岐・ループ・例外処理を使用。
 
-- 🔜 [ToDoListApp](./ToDoListApp/README.md)  
+- [ ]  [ToDoListApp](./ToDoListApp/README.md)  
   入力をもとにタスクを管理できるToDoリスト。リスト操作、構造化の練習用。
 
 ---
