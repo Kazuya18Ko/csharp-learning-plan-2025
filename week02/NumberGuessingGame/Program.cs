@@ -16,32 +16,49 @@ class Program {
         // 2.ユーザー入力の取得
 
         while (true) {
-            Console.WriteLine($"1～100までの数字を入力してください");
-            string input = Console.ReadLine();
+            try
+            {
+                Console.WriteLine($"1～100までの数字を入力してください");
+                string input = Console.ReadLine();
 
-            // 入力値の検証
-            if (!int.TryParse(input, out guessNum)) {
-                Console.WriteLine($"数字を入力してください。\n");
-                continue;
-            }
+                // 入力値の検証
+                if(string.IsNullOrEmpty(input))
+                {
+                    throw new ArgumentException("入力が空です。");
+                }
+                if (!int.TryParse(input, out guessNum))
+                {
+                    throw new FormatException("数字を入力してください。");
+                }
+                if (guessNum < 1 || guessNum > 100)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(guessNum),guessNum,"1～100までの数字を入力してください。");
+                }
 
-            if (guessNum < 1 || guessNum > 100) {
-                Console.WriteLine($"1～100までの数字を入力してください。入力された数字:({guessNum})\n");
-                continue;
-            }
-
-            if (guessNum < correctNum) {
+                // 正誤判定
                 attempts++; //試行回数のカウント
-                Console.WriteLine($"{attempts}:もっと大きい数字です。\n");
+                if (guessNum < correctNum) {
+                    Console.WriteLine($"{attempts}:もっと大きい数字です。\n");
+                }
+                else if (guessNum > correctNum) {
+                    Console.WriteLine($"{attempts}:もっと小さい数字です。\n");
+                }
+                else {
+                    Console.WriteLine($"正解です！\n試行回数:{attempts}");
+                    break;
+                }
             }
-            else if (guessNum > correctNum) {
-                attempts++; //試行回数のカウント
-                Console.WriteLine($"{attempts}:もっと小さい数字です。\n");
+            catch (ArgumentOutOfRangeException ex)
+            {
+                Console.WriteLine($"{ex.Message}\n");
             }
-            else {
-                attempts++; //試行回数のカウント
-                Console.WriteLine($"正解です！\n試行回数:{attempts}");
-                break;
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine($"{ex.Message}\n");
+            }
+            catch(FormatException ex)
+            {
+                Console.WriteLine($"{ex.Message}\n");
             }
         }
     }
