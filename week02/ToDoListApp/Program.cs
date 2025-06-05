@@ -1,2 +1,12 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+using System;
+using ToDoList.Services;
+using ToDoList.Views;
+
+class Program
+{
+    static void Main()
+    {
+        // デバッグエリア
+
+    }
+}
