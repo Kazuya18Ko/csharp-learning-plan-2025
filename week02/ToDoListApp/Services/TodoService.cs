@@ -1,5 +1,7 @@
 using ToDoListApp.Models;
 
+namespace ToDoList.Services;
+
 public class Todoservice
 {
     // main稼働時に一度だけ呼び出す
@@ -9,7 +11,8 @@ public class Todoservice
     public void Add(string title)
     {
         // TodoItem型だと見てわかるからvar使用
-        var task = new TodoItem {
+        var task = new TodoItem
+        {
             Id = nextId++,
             Title = title,
             IsCompleted = false;

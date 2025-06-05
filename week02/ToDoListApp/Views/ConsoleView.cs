@@ -1,4 +1,6 @@
-using Models;
+using ToDoListApp.Models;
+
+namespace ToDoListApp.Views;
 
 public class ConsoleView
 {

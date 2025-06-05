@@ -1,5 +1,7 @@
 using System;
 
+namespace ToDoList.Models;
+
 public class TodoItem
 {
     public int Id { get; set; } // idを格納するプロパティ
