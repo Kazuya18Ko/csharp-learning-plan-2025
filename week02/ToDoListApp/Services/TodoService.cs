@@ -42,7 +42,11 @@ public class TodoService
 
     public bool Complete(int id)
     {
-        return false;
+        var task = tasks.FirstOrDefault(t->t.Id == id);
+        if (task == null) return false;
+
+        task.IsCompleted = true;
+        return true;
     }
     public bool Delete(int id)
     {
