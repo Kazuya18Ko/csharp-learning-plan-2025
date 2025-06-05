@@ -21,7 +21,8 @@ public class Todoservice
     }
     public List<TodoItem> GetAll()
     {
-        return new();
+        // 保持しているリストをコピーして返す
+        return new List<TodoItem>(tasks);
     }
     public bool Complete(int id)
     {
