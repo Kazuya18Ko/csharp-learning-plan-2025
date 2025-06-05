@@ -51,6 +51,7 @@ feature/day6-todolist-implementation ─── feature/day6-method-getall
                                      ├── feature/day6-method-add
                                      ├── feature/day6-method-complete
                                      ├── feature/day6-method-delete
+                                     ├── feature/day6-final-main
                                      └── feature/day6-cleanup-debug
 
 ```
