@@ -9,7 +9,5 @@ class Program {
 
         // リストの初回読み込み
         var service = new TodoService();
-
-        
     }
 }
