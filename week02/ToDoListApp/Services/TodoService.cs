@@ -42,12 +42,17 @@ public class TodoService
 
     public bool Complete(int id)
     {
-        var task = tasks.FirstOrDefault(t->t.Id == id);
-        if (task == null) return false;
-
-        task.IsCompleted = true;
-        return true;
+        foreach (var task in tasks)
+        {
+            if(task.Id == id)
+            {
+                task.IsCompleted = true;
+                return true;
+            }
+        }
+        return false;
     }
+
     public bool Delete(int id)
     {
         return false;
