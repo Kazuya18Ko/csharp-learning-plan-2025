@@ -55,6 +55,14 @@ public class TodoService
 
     public bool Delete(int id)
     {
+        for (int i = 0; i < tasks.Count; i++)
+        {
+            if (tasks[i].Id == id)
+            {
+                tasks.RemoveAt(i);
+                return true;
+            }
+        }
         return false;
     }
 }
