@@ -45,4 +45,12 @@
 - コンソールからの操作フローを完成させる
 - 実務を意識して一つのアプリを完成させる
 
-## 
+## ブランチ構成
+```
+feature/day6-todolist-implementation ─── feature/day6-method-getall
+                                     ├── feature/day6-method-add
+                                     ├── feature/day6-method-complete
+                                     ├── feature/day6-method-delete
+                                     └── feature/day6-cleanup-debug
+
+```
