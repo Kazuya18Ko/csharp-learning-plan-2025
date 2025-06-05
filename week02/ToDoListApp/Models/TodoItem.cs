@@ -1,4 +1,4 @@
-namespace ToDoList.Models;
+namespace ToDoListApp.Models;
 
 public class TodoItem
 {

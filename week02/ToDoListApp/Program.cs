@@ -1,12 +1,13 @@
 using System;
-using ToDoList.Services;
-using ToDoList.Views;
+using ToDoListApp.Services;
+using ToDoListApp.Views;
+
+namespace ToDoListApp;
 
 class Program
 {
     static void Main()
     {
         // デバッグエリア
-
     }
 }

@@ -11,6 +11,6 @@ public class ConsoleView
 
     public static void ShowMessage(string message)
     {
-        ConsoleView.WriteLine(message);
+        Console.WriteLine(message);
     }
 }

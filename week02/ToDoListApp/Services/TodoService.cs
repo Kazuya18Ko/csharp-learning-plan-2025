@@ -1,8 +1,8 @@
 using ToDoListApp.Models;
 
-namespace ToDoList.Services;
+namespace ToDoListApp.Services;
 
-public class Todoservice
+public class TodoService
 {
     // main稼働時に一度だけ呼び出す
     private List<TodoItem> tasks = new();
@@ -15,7 +15,7 @@ public class Todoservice
         {
             Id = nextId++,
             Title = title,
-            IsCompleted = false;
+            IsCompleted = false,
         };
         tasks.Add(task); // 追加
     }
@@ -30,6 +30,6 @@ public class Todoservice
     }
     public bool Delete(int id)
     {
-        return false
+        return false;
     }
 }
