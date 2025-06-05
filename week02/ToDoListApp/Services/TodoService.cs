@@ -42,8 +42,17 @@ public class TodoService
 
     public bool Complete(int id)
     {
+        foreach (var task in tasks)
+        {
+            if(task.Id == id)
+            {
+                task.IsCompleted = true;
+                return true;
+            }
+        }
         return false;
     }
+
     public bool Delete(int id)
     {
         return false;
