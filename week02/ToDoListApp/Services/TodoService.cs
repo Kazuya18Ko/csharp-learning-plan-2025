@@ -24,6 +24,22 @@ public class TodoService
         // 保持しているリストをコピーして返す
         return new List<TodoItem>(tasks);
     }
+    // GetAllメソッドデバッグ用のテストデータ追加メソッド
+    public void AddTestDataForGetAll()
+    {
+        tasks.Add(new TodoItem {
+            Id = nextId++,
+            Title = "kazuya",
+            IsCompleted = false,
+        });
+        tasks.Add(new TodoItem {
+            Id = nextId++,
+            Title = "taro",
+            IsCompleted = false,
+        });
+
+    }
+
     public bool Complete(int id)
     {
         return false;
