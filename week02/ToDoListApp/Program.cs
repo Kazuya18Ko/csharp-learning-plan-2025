@@ -68,6 +68,33 @@ class Program {
         foreach (var task in service.GetAll()) {
             Console.WriteLine($"{task.Id}: {task.Title} - {task.IsCompleted}");
         }
+
         Console.WriteLine(""); // デバッグを見やすくするため改行
+
+        //Deleteメソッドのデバッグ
+        input = Console.ReadLine();
+
+        if (!int.TryParse(input, out id)) {
+            Console.WriteLine("数字を入力してください");
+            return;
+        }
+
+        if (id <= 0) {
+            Console.WriteLine("IDは1以上を入力してください");
+            return;
+        }
+
+        success = service.Delete(id);
+        if (success) {
+            Console.WriteLine("タスクを削除しました");
+        }
+        else {
+            Console.WriteLine("指定したタスクが存在しません");
+            return;
+        }
+        // 正しく入力した場合反映されているか確認
+        foreach (var task in service.GetAll()) {
+            Console.WriteLine($"{task.Id}: {task.Title} - {task.IsCompleted}");
+        }
     }
 }
