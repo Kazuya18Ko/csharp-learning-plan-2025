@@ -18,7 +18,7 @@ class Program
             // ConsoleViewからShowMenuメソッド呼び出し
             ConsoleView.ShowMenu();
 
-            string? input = ConsoleView.ReadInput();
+            string? input = ConsoleView.ReadInput("");
 
             if (!int.TryParse(input, out n))
             {
@@ -37,8 +37,7 @@ class Program
             switch (n)
             {
                 case 1: // タスクを追加
-                    Console.Write("タスク名を入力してください:");
-                    string? title = ConsoleView.ReadInput();
+                    string? title = ConsoleView.ReadInput("タスク名を入力してください:");
                     service.Add(title);
                     break;
                 case 2: // タスクを一覧表示(ほとんどConsoleView.csに投げる)
@@ -48,8 +47,7 @@ class Program
                     break;
                 case 3: // タスクを完了
                     {
-                        Console.Write("完了したタスク番号を入力してください:");
-                        input = ConsoleView.ReadInput();
+                        input = ConsoleView.ReadInput("完了したタスク番号を入力してください:");
                         if (!int.TryParse(input, out int taskId))
                         {
                             ConsoleView.ShowMessage("タスク番号を正しく入力してください");
@@ -63,8 +61,7 @@ class Program
                     }
                 case 4: // タスクを削除
                     {
-                        Console.Write("削除したいタスク番号を入力してください:");
-                        input = ConsoleView.ReadInput();
+                        input = ConsoleView.ReadInput("削除したいタスク番号を入力してください:");
                         if (!int.TryParse(input, out int taskId))
                         {
                             ConsoleView.ShowMessage("タスク番号を正しく入力してください");
