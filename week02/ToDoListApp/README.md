@@ -55,3 +55,35 @@ feature/day6-todolist-implementation ─── feature/day6-method-getall
                                      └── feature/day6-cleanup-debug
 
 ```
+
+## 備考
+- 作業の見通しが甘く、完成までたどり着けなかった
+- 現在はTodoService.csの完成までは出来ている
+- 次の作業で、Program.csにコンソール表示から内部処理書いて仮完成、コンソール表示部分をConsoleView.csに切り分けてアプリケーションの完成まで行う予定
+
+---
+
+# Day 7 : ToDoListAppを実装する(完成編)
+
+## 概要
+- Day6で完成に至らなかったToDoリストアプリの最終仕上げを行う。
+- `Program.cs`にてユーザー入力から処理実行までの仮実装を行い、  
+  その後 `ConsoleView.cs` に表示ロジックを切り出してアプリケーションの本完成を目指す。
+
+## 学習目的
+- ユーザー操作に基づくアプリケーションの処理フローを完成させる
+- 表示処理のView層への分離を通じてMVSモデルの責務分担を学ぶ
+- 仮実装→整理（リファクタ）→完成という実務的な流れを経験する
+- アプリ全体の挙動確認・微調整・例外対応の土台づくり
+
+## ブランチ構成（予定）
+```
+feature/day7-console-implementation ─── feature/day7-program-main
+                                    ├── feature/day7-consoleview
+                                    └── feature/day7-final-adjustments
+```
+
+## 備考
+- 表示処理は `Views/ConsoleView.cs` に切り出し、`Program.cs`は処理フローのみに集中させる設計とする
+- 動作テストを通じて各処理の確認と小さな改善（例外処理など）も行う
+- 次のステップでは、このアプリをベースにポートフォリオ整理（README補完、コードリファクタ、動作例GIFなど）を予定
