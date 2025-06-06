@@ -80,9 +80,9 @@ git push --force-with-lease --set-upstream origin feature/day6-method-getall
 
 ---
 
-# Day7 Git Rebase トラブルと対処ログ
+## Day7: Git Rebase トラブルと対処ログ
 
-## 🔹 発生した問題
+### 発生した問題
 - `git pull --rebase` 実行時、以下のエラーが発生：
   ```
   fatal: It seems that there is already a rebase-merge directory...
@@ -90,12 +90,12 @@ git push --force-with-lease --set-upstream origin feature/day6-method-getall
 - 原因は、**前回のrebaseが中断状態で残っていた**こと。
 - さらに、別ブランチ（feature/day7-consoleview）をpullしようとして**未解決の競合が大量発生**。
 
-## 🔹 原因の詳細
+### 原因の詳細
 - `git pull --rebase` は内部で `rebase` を行うが、**前回のrebaseが未完了**だと `rebase-merge` フォルダが残り、次のrebaseが実行できない。
 - `git rebase --abort` を行う前に `pull --rebase` を続行しようとしたため、状態が壊れかけた。
 - 解消後の `git push` でも「non-fast-forward」エラーが出たが、これはリモートとの差分が生じていたため。
 
-## ✅ 対処手順
+### 対処手順
 1. **中断されたrebaseのキャンセル**
    ```bash
    git rebase --abort
@@ -118,8 +118,31 @@ git push --force-with-lease --set-upstream origin feature/day6-method-getall
    git pull --rebase origin feature/day7-consoleview
    ```
 
-## 🔍 今後の教訓
+### 今後の教訓
 - `rebase` を使っているときは、**途中で止めたら必ず `--abort` を実行**する。
 - `pull --rebase` 前に `git status` で中断状態や未解決の競合がないか確認する。
 - `push` 時の「non-fast-forward」は、`pull`で差分を先に取り込む必要がある。
 - 面倒な場合は、`rebase`より`merge`の方が安全なこともある（特にチーム開発では要注意）。
+
+---
+
+## Day 7: Issueの拡張
+### 概要
+ConsoleView分離に伴う追加タスクが発生
+
+### 背景
+- 当初のIssue`#35`では、`Console.WriteLine`を`ConsoleView.ShowMessage`に置き換える実装が主な目的だった
+- しかし、作業の途中で以下のような**設計上の自然な流れ・改善アイデア**が見つかり、以下の追加作業が発生した。
+
+### 追加で発生した作業内容
+|**内容**												|**目的**															|**分類**		|
+|-------------------------------------------------------|-------------------------------------------------------------------|---------------|
+|`Console.ReadLiine`の読み取りも`ConsoleView.csに集約`	|表示だけでなく**入出力の一元管理を目指す**						|`feature`		|
+|`Console.Write`の置換									|メッセージ以外の補助的な出力（入力促しなど）も`ConsoleView`に集約	|`feature`		|
+|タスクの完了状態を`✅ / ☐`で視覚的に表示				|ユーザビリティ向上（資格では握）									|`enhancement`	|
+
+### 今後の対応方針
+- 上記の各作業は、新しいIssueを分けて立て、明確に作業単位を分割する
+- PR`#35`の補足やマイルストーンにこれらの関連タスクとして言及
+- 各ブランチでは`ConsoleView`による機能の段階的な移譲を実施
+- 段階ごとにマージし、今後の設計改善に活かす予定

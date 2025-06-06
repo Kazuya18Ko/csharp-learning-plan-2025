@@ -80,7 +80,10 @@ feature/day6-todolist-implementation ─── feature/day6-method-getall
 ```
 feature/day7-todolist-implementation ─── feature/day7-program-main
                                      ├── feature/day7-consoleview
-                                     └── feature/day7-final-adjustments
+                                     ├── feature/day7-final-adjustments
+                                     ├── feature/day7-consoleview-input
+                                     ├── feature/day7-consoleview-output
+                                     └── enhancement/day7-task-status-visual
 ```
 
 ## 備考
