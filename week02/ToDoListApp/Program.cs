@@ -22,14 +22,14 @@ class Program
 
             if (!int.TryParse(input, out n))
             {
-                Console.WriteLine("数字を入力してください");
-                Console.WriteLine(""); //改行
+                ConsoleView.ShowMessage("数字を入力してください");
+                ConsoleView.ShowMessage(""); //改行
                 continue;
             }
             if (n <= 0 || n > 5)
             {
-                Console.WriteLine("1～5の数字を入力してください");
-                Console.WriteLine(""); //改行
+                ConsoleView.ShowMessage("1～5の数字を入力してください");
+                ConsoleView.ShowMessage(""); //改行
                 continue;
             }
 
@@ -52,12 +52,12 @@ class Program
                         input = Console.ReadLine();
                         if (!int.TryParse(input, out int taskId))
                         {
-                            Console.WriteLine("タスク番号を正しく入力してください");
+                            ConsoleView.ShowMessage("タスク番号を正しく入力してください");
                             break;
                         }
                         if (!service.Complete(taskId))
                         {
-                            Console.WriteLine("指定されたタスクが存在しません");
+                            ConsoleView.ShowMessage("指定されたタスクが存在しません");
                         }
                         break;
                     }
@@ -67,22 +67,22 @@ class Program
                         input = Console.ReadLine();
                         if (!int.TryParse(input, out int taskId))
                         {
-                            Console.WriteLine("タスク番号を正しく入力してください");
+                            ConsoleView.ShowMessage("タスク番号を正しく入力してください");
                             break;
                         }
                         if (!service.Delete(taskId))
                         {
-                            Console.WriteLine("指定されたタスクが存在しません");
+                            ConsoleView.ShowMessage("指定されたタスクが存在しません");
                         }
                         break;
                     }
                 case 5: // 終了
-                    Console.WriteLine($"{n}:が入力されました"); //デバッグ
-                    Console.WriteLine("プログラムを終了します"); //終了処理
+                    ConsoleView.ShowMessage($"{n}:が入力されました"); //デバッグ
+                    ConsoleView.ShowMessage("プログラムを終了します"); //終了処理
                     return;
             }
 
-            Console.WriteLine(""); //改行
+            ConsoleView.ShowMessage(""); //改行
         }
     }
 }
