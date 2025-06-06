@@ -1,4 +1,4 @@
-# Day 5: TodoListAppを実装する(応用編)
+# Day 5: TodoListAppを実装する(設計・外形構築)
 
 ## 概要
 - TodoListAppの実装を開始。
@@ -29,3 +29,29 @@
 - Visual Studio 2022 Community
 - コンソールアプリケーション(`dotnet new console`)
 - 基本的な構文、`System`ライブラリ
+
+---
+
+# Day 6 : ToDoListAppを実装する(内部処理実装・完成)
+
+## 概要
+- TodoListの各クラスのメソッドの内部処理を実装、コンソールからの操作フローを完成させる。
+- 本日中に完成予定
+
+## 学習目的
+- タスクの追加・表示・削除など、基本的な機能を実装する
+- 最低限のユーザー操作を受け付けるコンソールUI作成する
+- 各メソッドの内部処理を実装し、MVSモデルの役割分担を学ぶ
+- コンソールからの操作フローを完成させる
+- 実務を意識して一つのアプリを完成させる
+
+## ブランチ構成
+```
+feature/day6-todolist-implementation ─── feature/day6-method-getall
+                                     ├── feature/day6-method-add
+                                     ├── feature/day6-method-complete
+                                     ├── feature/day6-method-delete
+                                     ├── feature/day6-final-main
+                                     └── feature/day6-cleanup-debug
+
+```

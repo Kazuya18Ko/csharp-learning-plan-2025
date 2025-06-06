@@ -1,4 +1,7 @@
-using Models;
+using System;
+using ToDoListApp.Models;
+
+namespace ToDoListApp.Views;
 
 public class ConsoleView
 {
@@ -8,6 +11,6 @@ public class ConsoleView
 
     public static void ShowMessage(string message)
     {
-        ConsoleView.WriteLine(message);
+        Console.WriteLine(message);
     }
 }
