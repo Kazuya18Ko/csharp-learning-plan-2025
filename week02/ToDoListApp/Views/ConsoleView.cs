@@ -31,8 +31,9 @@ public class ConsoleView
         Console.WriteLine(message);
     }
     // メッセージ入力 ひとまず入力部分だけ
-    public static string? ReadInput()
+    public static string? ReadInput(string promptMessage)
     {
+        Console.Write(promptMessage);
         return Console.ReadLine();
     }
 }
