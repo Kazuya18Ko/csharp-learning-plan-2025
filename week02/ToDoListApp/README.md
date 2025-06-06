@@ -78,9 +78,9 @@ feature/day6-todolist-implementation ─── feature/day6-method-getall
 
 ## ブランチ構成（予定）
 ```
-feature/day7-console-implementation ─── feature/day7-program-main
-                                    ├── feature/day7-consoleview
-                                    └── feature/day7-final-adjustments
+feature/day7-todolist-implementation ─── feature/day7-program-main
+                                     ├── feature/day7-consoleview
+                                     └── feature/day7-final-adjustments
 ```
 
 ## 備考

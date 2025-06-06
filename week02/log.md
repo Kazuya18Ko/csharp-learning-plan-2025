@@ -71,3 +71,12 @@ git push --force-with-lease --set-upstream origin feature/day6-method-getall
 ### 備考
 - 明日は数あてゲーム、ToDoリストアプリの発展課題（リファクタリングなど）を行う予定だったが、一日押しているため、また違う機会に行うこととする。
 
+---
+
+## Day 7: Issue管理とMilestone
+### 概要
+- 本日の作業から親Issue作成後、本日作成が予測される子Issueを分けて仮作成作成し、作業毎のIssue作成による減速の逓減を測った。
+- また、Milestoneの存在も知ったため、これを導入し、子Issueと紐づけることで作業進捗を分かりやすくした。
+
+---
+
