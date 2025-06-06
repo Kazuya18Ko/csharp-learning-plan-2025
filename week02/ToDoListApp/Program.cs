@@ -4,15 +4,16 @@ using ToDoListApp.Views;
 
 namespace ToDoListApp;
 
-class Program {
-    static void Main() {
+class Program
+{
+    static void Main()
+    {
 
         // リストの初回読み込み
         var service = new TodoService();
-        service.AddTestDataForGetAll();
         int n = 0;
 
-        while(true)
+        while (true)
         {
             // コンソール表示処理
             // この部分は後にConsoleView.csに切り分ける
@@ -26,50 +27,63 @@ class Program {
 
             string? input = Console.ReadLine();
 
-            if(!int.TryParse(input,out n))
+            if (!int.TryParse(input, out n))
             {
                 Console.WriteLine("数字を入力してください");
                 Console.WriteLine(""); //改行
                 continue;
             }
-            if(n <= 0 ||  n > 5)
+            if (n <= 0 || n > 5)
             {
                 Console.WriteLine("1～5の数字を入力してください");
                 Console.WriteLine(""); //改行
                 continue;
             }
-            else
+
+            // ここがProgram.csの本当の処理領域
+            // ConsoleView.ShowMenu(); とか？
+            switch (n)
             {
-                // ここがProgram.csの本当の処理領域
-                // ConsoleView.ShowMenu(); とか？
-                switch(n)
-                {
-                    case 1: // タスクを追加
-                        Console.Write("タスク名を入力してください:");
-                        string? title = Console.ReadLine();
-                        service.Add(title);
-                        break;
-                    case 2: // タスクを一覧表示
-                        var tasks = service.GetAll();
-                        // ConsoleView.ShowTask(todos); とか？
-                        Console.WriteLine(""); //改行
-                        foreach (var task in tasks)
+                case 1: // タスクを追加
+                    Console.Write("タスク名を入力してください:");
+                    string? title = Console.ReadLine();
+                    service.Add(title);
+                    break;
+                case 2: // タスクを一覧表示
+                    var tasks = service.GetAll();
+                    // ConsoleView.ShowTask(todos); とか？
+                    Console.WriteLine(""); //改行
+                    foreach (var task in tasks)
+                    {
+                        Console.WriteLine($"{task.Id}:{task.Title} - {task.IsCompleted}");
+                    }
+                    break;
+                case 3: // タスクを完了
+                    {
+                        Console.Write("完了したタスク番号を入力してください:");
+                        input = Console.ReadLine();
+                        if (!int.TryParse(input, out int taskId))
                         {
-                            Console.WriteLine($"{task.Id}:{task.Title} - {task.IsCompleted}");
+                            Console.WriteLine("タスク番号を正しく入力してください");
+                            break;
+                        }
+                        if (!service.Complete(taskId))
+                        {
+                            Console.WriteLine("指定されたタスクが存在しません");
                         }
                         break;
-                    case 3: // タスクを完了
+                    }
+                case 4: // タスクを削除
+                    {
                         Console.WriteLine($"{n}:が入力されました"); //デバッグ
                         break;
-                    case 4: // タスクを削除
-                        Console.WriteLine($"{n}:が入力されました"); //デバッグ
-                        break;
-                    case 5: // 終了
-                        Console.WriteLine($"{n}:が入力されました"); //デバッグ
-                        Console.WriteLine("プログラムを終了します"); //終了処理
-                        return;
-                }
+                    }
+                case 5: // 終了
+                    Console.WriteLine($"{n}:が入力されました"); //デバッグ
+                    Console.WriteLine("プログラムを終了します"); //終了処理
+                    return;
             }
+
             Console.WriteLine(""); //改行
         }
     }
