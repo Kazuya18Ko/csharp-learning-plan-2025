@@ -75,7 +75,17 @@ class Program
                     }
                 case 4: // タスクを削除
                     {
-                        Console.WriteLine($"{n}:が入力されました"); //デバッグ
+                        Console.Write("削除したいタスク番号を入力してください:");
+                        input = Console.ReadLine();
+                        if (!int.TryParse(input, out int taskId))
+                        {
+                            Console.WriteLine("タスク番号を正しく入力してください");
+                            break;
+                        }
+                        if (!service.Delete(taskId))
+                        {
+                            Console.WriteLine("指定されたタスクが存在しません");
+                        }
                         break;
                     }
                 case 5: // 終了
