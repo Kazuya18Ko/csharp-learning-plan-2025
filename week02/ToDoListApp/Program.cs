@@ -17,6 +17,9 @@ class Program
         {
             // コンソール表示処理
             // この部分は後にConsoleView.csに切り分ける
+            // メッセージを表示したいときはConsoleView.ShouMessage("")で統一予定
+
+            // ConsoleView.ShowMenu(); に切り出す予定
             Console.WriteLine("=== Todoリスト アプリ ===");
             Console.WriteLine("1. タスクを追加");
             Console.WriteLine("2. タスクを一覧表示");
@@ -41,7 +44,6 @@ class Program
             }
 
             // ここがProgram.csの本当の処理領域
-            // ConsoleView.ShowMenu(); とか？
             switch (n)
             {
                 case 1: // タスクを追加
@@ -49,9 +51,9 @@ class Program
                     string? title = Console.ReadLine();
                     service.Add(title);
                     break;
-                case 2: // タスクを一覧表示
+                case 2: // タスクを一覧表示(ほとんどConsoleView.csに投げる)
                     var tasks = service.GetAll();
-                    // ConsoleView.ShowTask(todos); とか？
+                    // ConsoleView.ShowTask(tasks); に移譲
                     Console.WriteLine(""); //改行
                     foreach (var task in tasks)
                     {
