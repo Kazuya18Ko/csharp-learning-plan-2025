@@ -17,6 +17,11 @@ public class ConsoleView
     }
     public static void ShowList(List<TodoItem> items)
     {
+        Console.WriteLine(""); //改行
+        foreach (var item in items)
+        {
+            Console.WriteLine($"{item.Id}:{item.Title} - {item.IsCompleted}");
+        }
     }
 
     public static void ShowMessage(string message)

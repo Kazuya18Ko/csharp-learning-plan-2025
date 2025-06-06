@@ -43,12 +43,8 @@ class Program
                     break;
                 case 2: // タスクを一覧表示(ほとんどConsoleView.csに投げる)
                     var tasks = service.GetAll();
-                    // ConsoleView.ShowTask(tasks); に移譲
-                    Console.WriteLine(""); //改行
-                    foreach (var task in tasks)
-                    {
-                        Console.WriteLine($"{task.Id}:{task.Title} - {task.IsCompleted}");
-                    }
+                    // ConsoleView.ShowList(tasks); に移譲
+                    ConsoleView.ShowList(tasks);
                     break;
                 case 3: // タスクを完了
                     {
