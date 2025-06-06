@@ -15,18 +15,8 @@ class Program
 
         while (true)
         {
-            // コンソール表示処理
-            // この部分は後にConsoleView.csに切り分ける
-            // メッセージを表示したいときはConsoleView.ShouMessage("")で統一予定
-
-            // ConsoleView.ShowMenu(); に切り出す予定
-            Console.WriteLine("=== Todoリスト アプリ ===");
-            Console.WriteLine("1. タスクを追加");
-            Console.WriteLine("2. タスクを一覧表示");
-            Console.WriteLine("3. タスクを完了");
-            Console.WriteLine("4. タスクを削除");
-            Console.WriteLine("5. 終了");
-            Console.Write("番号を選んでください: ");
+            // ConsoleViewからShowMenuメソッド呼び出し
+            ConsoleView.ShowMenu();
 
             string? input = Console.ReadLine();
 
