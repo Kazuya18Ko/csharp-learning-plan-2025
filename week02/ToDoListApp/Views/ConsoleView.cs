@@ -22,7 +22,14 @@ public class ConsoleView
         Console.WriteLine(""); //改行
         foreach (var item in items)
         {
-            Console.WriteLine($"{item.Id}:{item.Title} - {item.IsCompleted}");
+            if(item.IsCompleted)
+            {
+                Console.WriteLine($"{item.Id}:{item.Title} - ✅");
+            }
+            else
+            {
+                Console.WriteLine($"{item.Id}:{item.Title} - ☐");
+            }
         }
     }
     // メッセージ出力
