@@ -15,31 +15,21 @@ class Program
 
         while (true)
         {
-            // コンソール表示処理
-            // この部分は後にConsoleView.csに切り分ける
-            // メッセージを表示したいときはConsoleView.ShouMessage("")で統一予定
-
-            // ConsoleView.ShowMenu(); に切り出す予定
-            Console.WriteLine("=== Todoリスト アプリ ===");
-            Console.WriteLine("1. タスクを追加");
-            Console.WriteLine("2. タスクを一覧表示");
-            Console.WriteLine("3. タスクを完了");
-            Console.WriteLine("4. タスクを削除");
-            Console.WriteLine("5. 終了");
-            Console.Write("番号を選んでください: ");
+            // ConsoleViewからShowMenuメソッド呼び出し
+            ConsoleView.ShowMenu();
 
             string? input = Console.ReadLine();
 
             if (!int.TryParse(input, out n))
             {
-                Console.WriteLine("数字を入力してください");
-                Console.WriteLine(""); //改行
+                ConsoleView.ShowMessage("数字を入力してください");
+                ConsoleView.ShowMessage(""); //改行
                 continue;
             }
             if (n <= 0 || n > 5)
             {
-                Console.WriteLine("1～5の数字を入力してください");
-                Console.WriteLine(""); //改行
+                ConsoleView.ShowMessage("1～5の数字を入力してください");
+                ConsoleView.ShowMessage(""); //改行
                 continue;
             }
 
@@ -53,12 +43,8 @@ class Program
                     break;
                 case 2: // タスクを一覧表示(ほとんどConsoleView.csに投げる)
                     var tasks = service.GetAll();
-                    // ConsoleView.ShowTask(tasks); に移譲
-                    Console.WriteLine(""); //改行
-                    foreach (var task in tasks)
-                    {
-                        Console.WriteLine($"{task.Id}:{task.Title} - {task.IsCompleted}");
-                    }
+                    // ConsoleView.ShowList(tasks); に移譲
+                    ConsoleView.ShowList(tasks);
                     break;
                 case 3: // タスクを完了
                     {
@@ -66,12 +52,12 @@ class Program
                         input = Console.ReadLine();
                         if (!int.TryParse(input, out int taskId))
                         {
-                            Console.WriteLine("タスク番号を正しく入力してください");
+                            ConsoleView.ShowMessage("タスク番号を正しく入力してください");
                             break;
                         }
                         if (!service.Complete(taskId))
                         {
-                            Console.WriteLine("指定されたタスクが存在しません");
+                            ConsoleView.ShowMessage("指定されたタスクが存在しません");
                         }
                         break;
                     }
@@ -81,22 +67,22 @@ class Program
                         input = Console.ReadLine();
                         if (!int.TryParse(input, out int taskId))
                         {
-                            Console.WriteLine("タスク番号を正しく入力してください");
+                            ConsoleView.ShowMessage("タスク番号を正しく入力してください");
                             break;
                         }
                         if (!service.Delete(taskId))
                         {
-                            Console.WriteLine("指定されたタスクが存在しません");
+                            ConsoleView.ShowMessage("指定されたタスクが存在しません");
                         }
                         break;
                     }
                 case 5: // 終了
-                    Console.WriteLine($"{n}:が入力されました"); //デバッグ
-                    Console.WriteLine("プログラムを終了します"); //終了処理
+                    ConsoleView.ShowMessage($"{n}:が入力されました"); //デバッグ
+                    ConsoleView.ShowMessage("プログラムを終了します"); //終了処理
                     return;
             }
 
-            Console.WriteLine(""); //改行
+            ConsoleView.ShowMessage(""); //改行
         }
     }
 }
