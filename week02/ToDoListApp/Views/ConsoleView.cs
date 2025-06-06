@@ -5,6 +5,7 @@ namespace ToDoListApp.Views;
 
 public class ConsoleView
 {
+    // メニュー表示
     public static void ShowMenu()
     {
         Console.WriteLine("=== Todoリスト アプリ ===");
@@ -15,6 +16,7 @@ public class ConsoleView
         Console.WriteLine("5. 終了");
         Console.Write("番号を選んでください: ");
     }
+    // タスク一覧表示
     public static void ShowList(List<TodoItem> items)
     {
         Console.WriteLine(""); //改行
@@ -23,9 +25,14 @@ public class ConsoleView
             Console.WriteLine($"{item.Id}:{item.Title} - {item.IsCompleted}");
         }
     }
-
+    // メッセージ出力
     public static void ShowMessage(string message)
     {
         Console.WriteLine(message);
+    }
+    // メッセージ入力 ひとまず入力部分だけ
+    public static string? ReadInput()
+    {
+        return Console.ReadLine();
     }
 }
