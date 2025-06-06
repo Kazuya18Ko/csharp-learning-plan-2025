@@ -45,7 +45,9 @@ class Program {
                 switch(n)
                 {
                     case 1: // タスクを追加
-                        Console.WriteLine($"{n}:が入力されました"); //デバッグ
+                        Console.Write("タスク名を入力してください:");
+                        string? title = Console.ReadLine();
+                        service.Add(title);
                         break;
                     case 2: // タスクを一覧表示
                         var tasks = service.GetAll();
