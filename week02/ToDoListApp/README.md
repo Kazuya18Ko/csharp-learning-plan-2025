@@ -63,27 +63,51 @@ feature/day6-todolist-implementation ─── feature/day6-method-getall
 
 ---
 
-# Day 7 : ToDoListAppを実装する(完成編)
+## Day 7 : ToDoListAppを実装する(完成編)
 
-## 概要
+### 概要
 - Day6で完成に至らなかったToDoリストアプリの最終仕上げを行う。
 - `Program.cs`にてユーザー入力から処理実行までの仮実装を行い、  
   その後 `ConsoleView.cs` に表示ロジックを切り出してアプリケーションの本完成を目指す。
 
-## 学習目的
+### 学習目的
 - ユーザー操作に基づくアプリケーションの処理フローを完成させる
 - 表示処理のView層への分離を通じてMVSモデルの責務分担を学ぶ
 - 仮実装→整理（リファクタ）→完成という実務的な流れを経験する
 - アプリ全体の挙動確認・微調整・例外対応の土台づくり
 
-## ブランチ構成（予定）
+### ブランチ構成（予定）
 ```
 feature/day7-todolist-implementation ─── feature/day7-program-main
                                      ├── feature/day7-consoleview
                                      └── feature/day7-final-adjustments
 ```
 
-## 備考
+### 進捗概要
+- `Program.cs` のメイン制御処理を完成。
+- 表示・入力処理を `ConsoleView.cs` に大幅に移譲。
+- `System` のインポート不要な構成に整理。
+- 表示面も改善し、視認性を向上。
+
+### 実装内容
+### `Program.cs`
+- `switch-case` によるメニュー選択処理を記述。
+- すべての `Console.WriteLine()` を `ConsoleView.ShowMessage()` に置換。
+- ユーザー入力も `Console.ReadLine()` から `ConsoleView.ReadInput()` へ移譲（#36）。
+
+### `ConsoleView.cs`
+- メニュー表示：`ShowMenu()`
+- メッセージ表示：`ShowMessage(string message)`
+- 入力受付：`ReadInput(string prompt)`（入力プロンプト付き）
+- タスク一覧表示：`ShowList(List<TodoItem>)`
+- 完了状態の視覚的表現：「☐」「✅」で表示。
+
+### 完了した改善
+- `System`のインポートを削除しても動作問題なし。
+- 画面表示を構造化し、ユーザーにとって見やすい出力へ改善。
+
+### 備考
+- 今回完了分に関するPRとIssueを整理済。
 - 表示処理は `Views/ConsoleView.cs` に切り出し、`Program.cs`は処理フローのみに集中させる設計とする
 - 動作テストを通じて各処理の確認と小さな改善（例外処理など）も行う
 - 次のステップでは、このアプリをベースにポートフォリオ整理（README補完、コードリファクタ、動作例GIFなど）を予定
