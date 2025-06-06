@@ -9,6 +9,7 @@ class Program {
 
         // リストの初回読み込み
         var service = new TodoService();
+        service.AddTestDataForGetAll();
         int n = 0;
 
         while(true)
@@ -40,21 +41,28 @@ class Program {
             else
             {
                 // ここがProgram.csの本当の処理領域
+                // ConsoleView.ShowMenu(); とか？
                 switch(n)
                 {
-                    case 1:
+                    case 1: // タスクを追加
                         Console.WriteLine($"{n}:が入力されました"); //デバッグ
                         break;
-                    case 2:
+                    case 2: // タスクを一覧表示
+                        var tasks = service.GetAll();
+                        // ConsoleView.ShowTask(todos); とか？
+                        Console.WriteLine(""); //改行
+                        foreach (var task in tasks)
+                        {
+                            Console.WriteLine($"{task.Id}:{task.Title} - {task.IsCompleted}");
+                        }
+                        break;
+                    case 3: // タスクを完了
                         Console.WriteLine($"{n}:が入力されました"); //デバッグ
                         break;
-                    case 3:
+                    case 4: // タスクを削除
                         Console.WriteLine($"{n}:が入力されました"); //デバッグ
                         break;
-                    case 4:
-                        Console.WriteLine($"{n}:が入力されました"); //デバッグ
-                        break;
-                    case 5:
+                    case 5: // 終了
                         Console.WriteLine($"{n}:が入力されました"); //デバッグ
                         Console.WriteLine("プログラムを終了します"); //終了処理
                         return;

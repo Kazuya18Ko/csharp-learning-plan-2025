@@ -25,6 +25,22 @@ public class TodoService
         return new List<TodoItem>(tasks);
     }
 
+    public void AddTestDataForGetAll() {
+        tasks.Add(new TodoItem
+        {
+            Id = nextId++,
+            Title = "散歩",
+            IsCompleted = false,
+
+        });
+        tasks.Add(new TodoItem {
+            Id = nextId++,
+            Title = "筋トレ",
+            IsCompleted = false,
+
+        });
+    }
+
     public bool Complete(int id)
     {
         foreach (var task in tasks)
