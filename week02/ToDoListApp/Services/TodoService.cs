@@ -24,7 +24,6 @@ public class TodoService
         // 保持しているリストをコピーして返す
         return new List<TodoItem>(tasks);
     }
-
     public bool Complete(int id)
     {
         foreach (var task in tasks)
