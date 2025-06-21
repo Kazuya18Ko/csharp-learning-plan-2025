@@ -1,6 +1,6 @@
 using System;
 
-public class Dog : Animal
+public class Cat : Animal
 {
     public override void Speak()
     {
