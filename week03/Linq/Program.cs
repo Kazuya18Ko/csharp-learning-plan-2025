@@ -1,2 +1,129 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+using System;
+using System.Collections.Generic;
+using System.Linq;
+// サンプルコード
+class Program
+{
+    static void Main()
+    {
+        // データの準備
+        var products = new List<Product>
+        {
+            new Product("リンゴ", 120, "果物"),
+            new Product("バナナ", 80, "果物"),
+            new Product("牛乳", 200, "飲料"),
+            new Product("ヨーグルト", 150, "飲料"),
+            new Product("パン", 100, "食品")
+        };
+
+        // 1) LINQ演算子を使って果物カテゴリーの価格を昇順で取得
+
+        var fruits = products
+            .Where(p => p.Category == "果物")   // 絞り込み：Category が "果物" のアイテムだけ取得
+            .OrderBy(p => p.Price)              // ソート：Price をキーに昇順ソート
+            .ToList();                          // 即時実行トリガー：「ここ」でクエリを実行して List<Product> を生成
+        /*
+         * ---ラムダ式の基本---
+         * ラムダ式 は「入力パラメーター => 処理式」の匿名関数を定義する構文です。
+         * 例えば:
+         * p => p.xxx
+         * は「引数 p を受け取り、その p の xxx プロパティを返す」関数を表します。
+         * 
+         * --- 主なLINQ演算子 ---
+         * .Where(Func<Product,bool>)      : シーケンスの絞り込み
+         * .OrderBy(Func<Product,TKey>)    : 指定キーでの昇順ソート
+         * .OrderByDescending(Func<…,…>) : 降順ソート（必要に応じて使い分け）
+         * .ToList()                       : Enumeration を確定し、List に格納
+         * 
+         * --- 遅延実行 vs 即時実行 ---
+         * ・Where / OrderBy / Select など : 遅延実行（評価は実際に列挙 or ToList()/Count()/First() 呼び出し時）
+         * ・ToList() / Count() / First()  : 即時実行（ここで初めてクエリ処理が走る）
+         * 
+         * --- 発展要素 ---
+         * ・匿名型 new { … }             : クラス定義不要の一時オブジェクト生成
+         * ・Aggregate(Func<…>)           : 複雑集計（例：文字列連結や最大最小など）
+         * ・Join / GroupJoin              : 複数シーケンスの結合
+         */
+
+        Console.WriteLine("【果物（価格昇順）】");
+        // 絞り込み、ソートしたfruitsを出力
+        // （.ForEachはLINQではなくList<T>型に定義されているメソッド）
+        fruits.ForEach(p => Console.WriteLine($"{p.Name}：{p.Price}円"));
+
+        // 2) グループ化＋集計
+        var avgByCategory = products
+            .GroupBy(p => p.Category)                   // Categoryプロパティでグループ化
+            .Select(g => new                            // グループ化したavgByCategoryの利用する要素をプロパティ化
+            {
+                Category = g.Key,                       // Key要素をavgByCategoryのCategoryプロパティとする
+                AveragePrice = g.Average(p => p.Price)  // CategoryのPriceの平均値をavgByCategoryのAveragePriceプロパティとする
+            });
+        /*
+         * --- 主なLINQ演算子 ---
+         * .GroupBy(Func<Product, TKey>)   : 指定したキーセレクター（例：p => p.Category）で要素をグループ化し、IEnumerable<IGrouping<TKey, Product>> を返す
+         * .Select(Func<Product, TResult>) : 投影・変換（別の型や匿名型へのマッピングに使用）
+         */
+
+        Console.WriteLine("\n【カテゴリー別 平均価格】");
+        // Categoryでグループ化したavgByCategoryを出力
+        // （avgByCategoryはList<T>型じゃないので.ForEachは使えない）
+        foreach(var grp in avgByCategory)
+        {
+            Console.WriteLine($"{grp.Category} -> {grp.AveragePrice:F1}円");
+        }
+
+        // 3) 別リスト（在庫数）と内部結合（Inner Join）
+        var stocks = new List<Stock>
+        {
+            new Stock("リンゴ", 50),
+            new Stock("牛乳", 20),
+            new Stock("パン", 30)
+        };
+
+        var inventory = products
+            .Join(
+                stocks,                     // ① inner シーケンス：結合対象のもうひとつのリスト
+                p => p.Name,                // ② outerKeySelector：外側（products）からキーを取り出す関数
+                s => s.ProductName,    // ③ innerKeySelector：内側（stocks）からキーを取り出す関数
+                (p, s) => new               // ④ resultSelector：キーが一致したときの出力形式
+                {
+                    p.Name,                 //  ・ProductのNameをinventoryのNameプロパティとする
+                    p.Price,                //  ・ProductのPriceをinventoryのPriceプロパティとする
+                    s.Quantity              //  ・StockのQuantityをinventoryのQuantityプロパティとする
+                }
+            );
+        /*
+         * --- 主なLINQ演算子 ---
+         * .Join<TOuter,TInner,TKey,TResult>: リストの結合
+         */
+
+        Console.WriteLine("\n【在庫情報】");
+        // リストの結合によって出来たinventoryの出力
+        foreach(var item in inventory )
+        {
+            Console.WriteLine($"{item.Name}: 価格={item.Price}円, 在庫数={item.Quantity}");
+        }
+    }
+}
+
+// 商品情報を表すデータモデルクラス
+class Product
+{
+    public string Name { get; }
+    public int Price { get; }
+    public string Category { get; }
+    // 商品名・価格・カテゴリーを指定して Product を初期化する
+    public Product(string name, int price, string category) =>
+        (Name, Price, Category) = (name, price, category);
+}
+
+// Productと違う要素数（共通点あり）のデータモデルクラス
+class Stock
+{
+    public string ProductName { get; }
+    public int Quantity { get; }
+    // 商品名、数量を指定して Stock を初期化する
+    public Stock(string n, int q) =>
+        (ProductName, Quantity) = (n, q);
+}
+
