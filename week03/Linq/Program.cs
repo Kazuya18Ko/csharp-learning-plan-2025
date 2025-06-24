@@ -36,8 +36,8 @@ class Program
          * .ToList()                       : Enumeration を確定し、List に格納
          * 
          * --- 遅延実行 vs 即時実行 ---
-         * ・Where / OrderBy / Select など：遅延実行（評価は実際に列挙 or ToList()/Count()/First() 呼び出し時）
-         * ・ToList() / Count() / First(): 即時実行（ここで初めてクエリ処理が走る）
+         * ・Where / OrderBy / Select など : 遅延実行（評価は実際に列挙 or ToList()/Count()/First() 呼び出し時）
+         * ・ToList() / Count() / First()  : 即時実行（ここで初めてクエリ処理が走る）
          * 
          * --- 発展要素 ---
          * ・匿名型 new { … }             : クラス定義不要の一時オブジェクト生成
@@ -52,11 +52,11 @@ class Program
 
         // 2) グループ化＋集計
         var avgByCategory = products
-            .GroupBy(p => p.Category)
-            .Select(g => new
+            .GroupBy(p => p.Category)                   // Categoryプロパティでグループ化
+            .Select(g => new                            // グループ化したavgByCategoryの利用する要素をプロパティ化
             {
-                Category = g.Key,
-                AveragePrice = g.Average(p => p.Price)
+                Category = g.Key,                       // Key要素をavgByCategoryのCategoryプロパティとする
+                AveragePrice = g.Average(p => p.Price)  // CategoryのPriceの平均値をavgByCategoryのAveragePriceプロパティとする
             });
         /*
          * --- 主なLINQ演算子 ---
@@ -71,6 +71,38 @@ class Program
         {
             Console.WriteLine($"{grp.Category} -> {grp.AveragePrice:F1}円");
         }
+
+        // 3) 別リスト（在庫数）と内部結合（Inner Join）
+        var stocks = new List<Stock>
+        {
+            new Stock("リンゴ", 50),
+            new Stock("牛乳", 20),
+            new Stock("パン", 30)
+        };
+
+        var inventory = products
+            .Join(
+                stocks,                     // ① inner シーケンス：結合対象のもうひとつのリスト
+                p => p.Name,                // ② outerKeySelector：外側（products）からキーを取り出す関数
+                s => s.ProductName,    // ③ innerKeySelector：内側（stocks）からキーを取り出す関数
+                (p, s) => new               // ④ resultSelector：キーが一致したときの出力形式
+                {
+                    p.Name,                 //  ・ProductのNameをinventoryのNameプロパティとする
+                    p.Price,                //  ・ProductのPriceをinventoryのPriceプロパティとする
+                    s.Quantity              //  ・StockのQuantityをinventoryのQuantityプロパティとする
+                }
+            );
+        /*
+         * --- 主なLINQ演算子 ---
+         * .Join<TOuter,TInner,TKey,TResult>: リストの結合
+         */
+
+        Console.WriteLine("\n【在庫情報】");
+        // リストの結合によって出来たinventoryの出力
+        foreach(var item in inventory )
+        {
+            Console.WriteLine($"{item.Name}: 価格={item.Price}円, 在庫数={item.Quantity}");
+        }
     }
 }
 
@@ -83,5 +115,15 @@ class Product
     // 商品名・価格・カテゴリーを指定して Product を初期化する
     public Product(string name, int price, string category) =>
         (Name, Price, Category) = (name, price, category);
+}
+
+// Productと違う要素数（共通点あり）のデータモデルクラス
+class Stock
+{
+    public string ProductName { get; }
+    public int Quantity { get; }
+    // 商品名、数量を指定して Stock を初期化する
+    public Stock(string n, int q) =>
+        (ProductName, Quantity) = (n, q);
 }
 
