@@ -33,7 +33,6 @@ class Program
          * .Where(Func<Product,bool>)      : シーケンスの絞り込み
          * .OrderBy(Func<Product,TKey>)    : 指定キーでの昇順ソート
          * .OrderByDescending(Func<…,…>) : 降順ソート（必要に応じて使い分け）
-         * .Select(Func<Product, TResult>) : 投影・変換（今回は使っていませんが、別の型や匿名型へのマッピングに使用）
          * .ToList()                       : Enumeration を確定し、List に格納
          * 
          * --- 遅延実行 vs 即時実行 ---
@@ -41,15 +40,37 @@ class Program
          * ・ToList() / Count() / First(): 即時実行（ここで初めてクエリ処理が走る）
          * 
          * --- 発展要素 ---
-         * ・匿名型 new { … }                    : クラス定義不要の一時オブジェクト生成
-         * ・Aggregate(Func<…>)                : 複雑集計（例：文字列連結や最大最小など）
-         * ・Join / GroupJoin                 : 複数シーケンスの結合
+         * ・匿名型 new { … }             : クラス定義不要の一時オブジェクト生成
+         * ・Aggregate(Func<…>)           : 複雑集計（例：文字列連結や最大最小など）
+         * ・Join / GroupJoin              : 複数シーケンスの結合
          */
 
         Console.WriteLine("【果物（価格昇順）】");
         // 絞り込み、ソートしたfruitsを出力
         // （.ForEachはLINQではなくList<T>型に定義されているメソッド）
         fruits.ForEach(p => Console.WriteLine($"{p.Name}：{p.Price}円"));
+
+        // 2) グループ化＋集計
+        var avgByCategory = products
+            .GroupBy(p => p.Category)
+            .Select(g => new
+            {
+                Category = g.Key,
+                AveragePrice = g.Average(p => p.Price)
+            });
+        /*
+         * --- 主なLINQ演算子 ---
+         * .GroupBy(Func<Product, TKey>)   : 指定したキーセレクター（例：p => p.Category）で要素をグループ化し、IEnumerable<IGrouping<TKey, Product>> を返す
+         * .Select(Func<Product, TResult>) : 投影・変換（別の型や匿名型へのマッピングに使用）
+         */
+
+        Console.WriteLine("\n【カテゴリー別 平均価格】");
+        // Categoryでグループ化したavgByCategoryを出力
+        // （avgByCategoryはList<T>型じゃないので.ForEachは使えない）
+        foreach(var grp in avgByCategory)
+        {
+            Console.WriteLine($"{grp.Category} -> {grp.AveragePrice:F1}円");
+        }
     }
 }
 
