@@ -75,7 +75,7 @@ class Program
         fruits.ForEach(p => Console.WriteLine($"{p.Name}：{p.Price}円"));
 
         // 1α)の出力
-        Console.WriteLine("【果物2（価格昇順）】");
+        Console.WriteLine("\n【果物2（価格昇順）】");
         foreach(var p in fruits2)
         {
             Console.WriteLine($"{p.Name}：{p.Price}円");
@@ -102,8 +102,8 @@ class Program
             group p by p.Category into g
             select new
             {
-                Category = global.Key,
-                AveragePrice = global.Averate(x => x.Price)
+                Category = g.Key,
+                AveragePrice = g.Average(x => x.Price)
             };
         /*
         * ---主なクエリ構文---
@@ -121,7 +121,7 @@ class Program
         }
 
         // 2α)の出力
-        Console.WriteLine("\n【カテゴリー別 平均価格】");
+        Console.WriteLine("\n【カテゴリー別2 平均価格】");
         foreach (var grp in avgByCategory)
         {
             Console.WriteLine($"{grp.Category} -> {grp.AveragePrice:F1}円");
@@ -153,9 +153,30 @@ class Program
          * .Join<TOuter,TInner,TKey,TResult>: リストの結合
          */
 
+        // 3α) クエリ構文で内部結合
+        var inventory2 =
+            from p in products
+            join s in stocks
+              on p.Name equals s.ProductName
+            select new
+            {
+                p.Name,
+                p.Price,
+                s.Quantity
+            };
+
+        // 3)の出力
         Console.WriteLine("\n【在庫情報】");
         // リストの結合によって出来たinventoryの出力
         foreach(var item in inventory )
+        {
+            Console.WriteLine($"{item.Name}: 価格={item.Price}円, 在庫数={item.Quantity}");
+        }
+
+        // 3α)の出力
+        Console.WriteLine("\n【在庫情報2】");
+        // リストの結合によって出来たinventoryの出力
+        foreach (var item in inventory2)
         {
             Console.WriteLine($"{item.Name}: 価格={item.Price}円, 在庫数={item.Quantity}");
         }
