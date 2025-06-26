@@ -96,6 +96,22 @@ class Program
          * .Select(Func<Product, TResult>) : 投影・変換（別の型や匿名型へのマッピングに使用）
          */
 
+        // 2α) クエリ構文でグループ化＋集計
+        var avgByProduct2 =
+            from p in products
+            group p by p.Category into g
+            select new
+            {
+                Category = global.Key,
+                AveragePrice = global.Averate(x => x.Price)
+            };
+        /*
+        * ---主なクエリ構文---
+        * group ... by ... into                : グループ化。into g でグループ変数を定義。
+        * select new { ... }                   : 投影＋匿名型生成。
+        */
+
+        // 2)の出力
         Console.WriteLine("\n【カテゴリー別 平均価格】");
         // Categoryでグループ化したavgByCategoryを出力
         // （avgByCategoryはList<T>型じゃないので.ForEachは使えない）
@@ -103,6 +119,14 @@ class Program
         {
             Console.WriteLine($"{grp.Category} -> {grp.AveragePrice:F1}円");
         }
+
+        // 2α)の出力
+        Console.WriteLine("\n【カテゴリー別 平均価格】");
+        foreach (var grp in avgByCategory)
+        {
+            Console.WriteLine($"{grp.Category} -> {grp.AveragePrice:F1}円");
+        }
+
 
         // 3) 別リスト（在庫数）と内部結合（Inner Join）
         var stocks = new List<Stock>
