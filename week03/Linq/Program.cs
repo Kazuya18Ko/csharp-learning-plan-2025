@@ -180,6 +180,30 @@ class Program
         {
             Console.WriteLine($"{item.Name}: 価格={item.Price}円, 在庫数={item.Quantity}");
         }
+
+        /*-------------------------------------------------------------------------------------------------*/
+        // 練習問題
+        // 1. 遅延実行 vs 即時実行の動作確認
+        var numbers = new List<int> { 1, 2, 3 };
+
+        // 遅延実行クエリの組み立て
+        var q = numbers.Where(n => n % 2 == 1);
+
+        // 元リストに"5"を追加して動作を観察
+        numbers.Add(5);
+        Console.WriteLine("遅延実行:");
+        foreach (var n in q)
+        {
+            Console.WriteLine(n);
+        }
+
+        // 即時実行トリガー実行後に元リストに"7"を追加
+        var list = q.ToList();
+        numbers.Add(7);
+
+        // TODO: list を foreach で回して出力するコードを記述
+        Console.WriteLine("即時実行後に7追加");//
+        list.ForEach(n => Console.WriteLine(n));
     }
 }
 
