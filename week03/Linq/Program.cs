@@ -191,7 +191,7 @@ class Program
 
         // 元リストに"5"を追加して動作を観察
         numbers.Add(5);
-        Console.WriteLine("遅延実行:");
+        Console.WriteLine("\n遅延実行:");
         foreach (var n in q)
         {
             Console.WriteLine(n);
@@ -202,8 +202,19 @@ class Program
         numbers.Add(7);
 
         // TODO: list を foreach で回して出力するコードを記述
-        Console.WriteLine("即時実行後に7追加");//
+        Console.WriteLine("\n即時実行後に7追加");//
         list.ForEach(n => Console.WriteLine(n));
+        // listでqを即時実行させてからnumbersに7を追加しているので出力に7は含まれない
+
+        // 2.Aggregate による文字列連結
+        // 10行目のproductsを再利用
+        var namesSeq = products.Select(p => p.Name);
+
+        // TODO: namesSeq を Aggregate を使って「,」区切りの文字列に連結し、Console.WriteLine で表示するコードを記述
+        var names = namesSeq.Aggregate((one, two) => one + "," + two);
+        Console.WriteLine($"\n文字列の連結\n{names}");
+        // Aggregate内の"one","two"は任意の文字列を用いていい
+        // "one","two"はコレクションの要素と要素の関係性を示している
     }
 }
 
