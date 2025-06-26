@@ -45,10 +45,42 @@ class Program
          * ・Join / GroupJoin              : 複数シーケンスの結合
          */
 
+        // 1α) クエリ構文で「果物」を絞り込み・価格昇順ソート
+        // （処理の仕方は1と同じ）
+        var fruits2 =
+            from p in products
+            where p.Category == "果物"
+            orderby p.Price ascending
+            select p;
+        /*
+         * クエリ構文方式
+         * ---メリット---
+         * ・SQLライクで直感的に読める（SELECT ... FROM ... WHERE ... ORDER BY ...）
+         * ・複雑なグループ化や結合が書きやすい（・group … by … into g や join … on … equals … がひとまとまりの句として見える
+         * ・複数句の順序をビジュアルに追いやすい（from → where → orderby → select の順に自然に並ぶため、「どの段階で何をしているか」がひと目で分かる。）
+         * 
+         * ---主なクエリ構文---
+         * from ... in                          : データソースを指定。
+         * where                                : 絞り込み。クエリ構文版はメソッド構文の Where と同じ。
+         * orderby ... ascending/descending     : ソート。ascending は省略可、descending で降順。
+         * group ... by ... into                : グループ化。into g でグループ変数を定義。
+         * join ... on ... equals ...           : 内部結合。SQL の JOIN と同じイメージで書ける。
+         * select new { ... }                   : 投影＋匿名型生成。
+         */
+
+        // 1)の出力
         Console.WriteLine("【果物（価格昇順）】");
         // 絞り込み、ソートしたfruitsを出力
         // （.ForEachはLINQではなくList<T>型に定義されているメソッド）
         fruits.ForEach(p => Console.WriteLine($"{p.Name}：{p.Price}円"));
+
+        // 1α)の出力
+        Console.WriteLine("【果物2（価格昇順）】");
+        foreach(var p in fruits2)
+        {
+            Console.WriteLine($"{p.Name}：{p.Price}円");
+        }
+
 
         // 2) グループ化＋集計
         var avgByCategory = products
