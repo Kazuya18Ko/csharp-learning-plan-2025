@@ -97,7 +97,7 @@ class Program
          */
 
         // 2α) クエリ構文でグループ化＋集計
-        var avgByProduct2 =
+        var avgByCategory2 =
             from p in products
             group p by p.Category into g
             select new
@@ -122,7 +122,7 @@ class Program
 
         // 2α)の出力
         Console.WriteLine("\n【カテゴリー別2 平均価格】");
-        foreach (var grp in avgByCategory)
+        foreach (var grp in avgByCategory2)
         {
             Console.WriteLine($"{grp.Category} -> {grp.AveragePrice:F1}円");
         }
@@ -179,6 +179,69 @@ class Program
         foreach (var item in inventory2)
         {
             Console.WriteLine($"{item.Name}: 価格={item.Price}円, 在庫数={item.Quantity}");
+        }
+
+        /*-------------------------------------------------------------------------------------------------*/
+        // 練習問題
+        // 1. 遅延実行 vs 即時実行の動作確認
+        var numbers = new List<int> { 1, 2, 3 };
+
+        // 遅延実行クエリの組み立て
+        var q = numbers.Where(n => n % 2 == 1);
+
+        // 元リストに"5"を追加して動作を観察
+        numbers.Add(5);
+        Console.WriteLine("\n遅延実行:");
+        foreach (var n in q)
+        {
+            Console.WriteLine(n);
+        }
+
+        // 即時実行トリガー実行後に元リストに"7"を追加
+        var list = q.ToList();
+        numbers.Add(7);
+
+        // TODO: list を foreach で回して出力するコードを記述
+        Console.WriteLine("\n即時実行後に7追加:");//
+        list.ForEach(n => Console.WriteLine(n));
+        // listでqを即時実行させてからnumbersに7を追加しているので出力に7は含まれない
+
+        // 2.Aggregate による文字列連結
+        // 10行目のproductsを再利用
+        var namesSeq = products.Select(p => p.Name);
+
+        // TODO: namesSeq を Aggregate を使って「,」区切りの文字列に連結し、Console.WriteLine で表示するコードを記述
+        var names = namesSeq.Aggregate((one, two) => one + "," + two);
+        Console.WriteLine($"\n文字列の連結\n{names}\n");
+        // Aggregate内の"one","two"は任意の文字列を用いていい
+        // "one","two"はコレクションの要素と要素の関係性を示している
+
+        // 3.複数キーによるグループ化
+        // ■ 「価格帯」を表す文字列を作成
+        // TODO: 以下の priceRange を三段階に分ける
+        //    ・100円未満 → "～99円"
+        //    ・100～199円 → "100～199円"
+        //    ・200円以上 → "200円～"
+        var stats =
+            from p in products
+            let priceRange = p.Price < 100 ? "～99円"
+                           : p.Price < 200 ? "100～200円"
+                           :                 "200円～"
+
+            group p by new { p.Category, PriceRange = priceRange } into g
+            select new
+            {
+                Category = g.Key.Category,
+                PriceRange = g.Key.PriceRange,
+                Count = g.Count(),
+                Avg = g.Average(x => x.Price)
+            };
+
+        Console.WriteLine("複数キーによるグループ化");
+        foreach (var x in stats)
+        {
+            // TODO: 結果をわかりやすく出力
+            Console.WriteLine($"{x.Category} / {x.PriceRange} → 件数:{x.Count}, 平均:{x.Avg:F1}円");
         }
     }
 }
